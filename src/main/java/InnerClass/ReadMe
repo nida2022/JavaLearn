@@ -1,0 +1,103 @@
+/*
+Inner Classes:
+    Classes which are defined in other class , the inner class can be treated as a member of outer class
+    Just as classes have member variables and methods, a class can also have member classes
+*/
+
+Whats the purpose of Inner Class :
+
+    SRP: Single Responsibility Principle
+    A class should have code only for the things an object of that particular type needs to do;
+    any other behavior should be part of another class better suited for that job.
+
+    Sometime a class that requires a separate specialized class in order to work.
+    This separate specialized class could be considered a helper class.
+    If the helper class is not used by any other class,
+    then it would be considered a prime candidate as an inner class .
+
+    Example :
+        WorkerWrite  : basically write the person to xmlFile .
+        for the person we need to write the transaction (hire, termination)
+        for the worker write we created a Inner WrtTrans which will fetch the trans and
+        Write the transaction for related person .
+
+        the program is supposed to get the transaction of a particular Person instance.
+        So the WrtTrans code needs access to the members of the WorkerWrite object to be useful
+         as a “helper” to a particular Workerwrite instance.
+
+Types of inner class :
+
+    1) Normal inner class
+    2) Method-local inner class
+    3) anonymous inner class
+    4) Static inner class
+
+1) Normal inner class : check code
+
+    A regular inner class is scoped inside another class’s curly braces, but outside any
+    method code (in other words, at the same level that an instance variable is declared).
+
+    A regular inner class is a member of the outer class just as instance variables
+    and methods are, so the following modifiers can be applied to an inner class:
+    final    abstract   public    private   protected
+    static—but static turns it into a static nested class, not an inner class
+
+2) Method Local inner Class :
+
+    Create inner class inside a method of outer class.
+    U can only create an instance of inner class inside the method inner class created.
+
+    The inner class object cannot use the local variables of the method the inner class is in
+    local variables of the method live on the stack and exist only for the lifetime of the method.
+    When the method ends, the stack frame is blown away and the variable is history.
+    But even after the method completes,
+    the inner class object created within it might still be alive on the heap
+    Because the local variables aren’t guaranteed to be alive as long as the method-local
+    inner class object is, the inner class object can’t use them.
+    Unless the local variables are marked final or are effectively final
+
+    Just a reminder about modifiers within a method: The same rules apply to method-local inner
+    classes as to local variable declarations. You can’t, for example, mark a method-local inner
+     class public, private, protected, static, transient, and the like. For the purpose of the exam,
+     the only modifiers you can apply to a method-local inner class are abstract and final,
+     but, as always, never both at the same time.
+
+     a local class declared in a static method has access to only static members of the enclosing class,
+      since there is no associated instance of the enclosing class. If you’re in a static method,
+      there is no this, so an inner class in a static method is subject to the same restrictions as
+      the static method.
+     In other words, no access to instance variables.
+
+3)Anonymous :
+
+      used when anonymous inner class—to override one or more methods
+      of the superclass! (Or to implement methods of an interface.)
+
+      Don’t be fooled by any attempts to instantiate an interface except in the case of
+      an anonymous inner class. The following is not legal:
+
+       Runnable r = new Runnable();
+
+      whereas the following is legal, because it’s instantiating an implementer of the Runnable
+      interface (an anonymous implementation class):
+
+      Runnable r= new Runnable (){
+        public void run(){
+        }
+      };
+Static Nested Classes:
+
+       They really aren’t inner classes at all based on the standard definition of an inner class.
+        Whereas an inner class (regardless of the flavor) enjoys that special relationship with the
+         outer class (or rather, the instances of the two classes share a relationship), a static nested
+         class does not. It is simply a non-inner (also called “top-level“) class scoped within another.
+          So with static classes, it’s
+       really more about name-space resolution than about an implicit relationship between the two classes.
+
+
+       The class itself isn’t really “static”; there’s no such thing as a static class.
+       The static modifier in this case says that the nested class is a static member of the outer class.
+       That means it can be accessed,as with other static members, without having an instance of the
+       outer class.
+
+
