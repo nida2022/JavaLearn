@@ -2,6 +2,7 @@ package InnerClass.AnnonymusClass;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Comparator;
 
 public class FileFilter {
 
